@@ -6,7 +6,7 @@ import (
 )
 
 func WriteFile(filename string, data string) error {
-	file, err := os.Create("output.txt")
+	file, err := os.Create("./output.txt")
 	if err != nil {
 		return err
 	}

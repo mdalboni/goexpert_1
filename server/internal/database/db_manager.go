@@ -13,7 +13,7 @@ var err error
 func SetupDatabase() *gorm.DB {
 	// Set up the test database
 	db, err = gorm.Open(
-		sqlite.Open("quotation.db?cache=shared&loc=UTC"),
+		sqlite.Open("./quotation.db?cache=shared&loc=UTC"),
 		&gorm.Config{},
 	)
 
