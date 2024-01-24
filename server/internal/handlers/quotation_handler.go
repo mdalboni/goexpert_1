@@ -40,7 +40,14 @@ func (qh *quotationHandler) GetQuotation(w http.ResponseWriter, r *http.Request)
 	defer cancel()
 
 	quotation := quotationResponse.ToQuotation()
-	qh.quotationService.SaveQuotation(ctx, &quotation)
+	err = qh.quotationService.SaveQuotation(ctx, &quotation)
+
+	if err != nil {
+		log.Error(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(errorResponse{Message: err.Error()})
+		return
+	}
 
 	err = json.NewEncoder(w).Encode(quotationResponse)
 	if err != nil {
